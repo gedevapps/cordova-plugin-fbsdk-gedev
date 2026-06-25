@@ -12,8 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MaximBelov/cordova-plugin-fbsdk"
+    "url": "https://github.com/gedevapps/cordova-plugin-fbsdk-gedev"
   },
+  "files": [
+    "CHANGELOG.md",
+    "README.md",
+    "docs",
+    "plugin.xml",
+    "scripts",
+    "src",
+    "tests",
+    "www"
+  ],
   "keywords": [
     "cordova",
     "facebook",

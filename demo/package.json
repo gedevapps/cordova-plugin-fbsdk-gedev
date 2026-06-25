@@ -3,7 +3,7 @@
   "description": "A demo application for the cordova-plugin-fbsdk",
   "version": "0.1.0",
   "author": "Maxim Belov",
-  "homepage": "https://github.com/MaximBelov/cordova-plugin-fbsdk",
+  "homepage": "https://github.com/gedevapps/cordova-plugin-fbsdk-gedev",
   "scripts": {
     "postinstall": "patch-package",
     "ng": "ng",
@@ -54,7 +54,7 @@
     "@types/facebook-js-sdk": "^3.3.12",
     "@types/node": "20.17.6",
     "cordova-plugin-device": "3.0.0",
-    "cordova-plugin-fbsdk": "file:../plugin",
+    "cordova-plugin-fbsdk": "file:..",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "5.0.1",
     "cordova-plugin-statusbar": "4.0.0",

@@ -13,7 +13,7 @@
       Cordova application as you use in your web application.
     </description>
 
-    <repo>https://github.com/MaximBelov/cordova-plugin-fbsdk</repo>
+    <repo>https://github.com/gedevapps/cordova-plugin-fbsdk-gedev</repo>
 
     <license>Apache 2.0</license>
 
