@@ -20,6 +20,7 @@
 @property (nonatomic, assign) FBSDKLoginTracking *loginTracking;
 @property (strong, nonatomic) NSString* gameRequestDialogCallbackId;
 @property (nonatomic, assign) BOOL applicationWasActivated;
+@property (nonatomic, assign) BOOL facebookApplicationDelegateInitialized;
 
 - (NSDictionary *)loginResponseObject;
 - (NSDictionary *)limitedLoginResponseObject;
@@ -32,6 +33,8 @@
 - (void)pluginInitialize {
     NSLog(@"Starting Facebook Connect plugin");
 
+    [self initializeFacebookApplicationDelegateWithLaunchOptions:nil];
+
     // Add notification listener for tracking app activity with FB Events
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidFinishLaunching:)
@@ -40,10 +43,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(handleOpenURLWithAppSourceAndAnnotation:)
-                                             name:CDVPluginHandleOpenURLWithAppSourceAndAnnotationNotification object:nil];
 }
 
 - (void) applicationDidFinishLaunching:(NSNotification *) notification {
@@ -53,9 +52,17 @@
         launchOptions = [NSDictionary dictionary];
     }
 
-    [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:launchOptions];
-    
+    [self initializeFacebookApplicationDelegateWithLaunchOptions:launchOptions];
+}
+
+- (void) initializeFacebookApplicationDelegateWithLaunchOptions:(NSDictionary *)launchOptions {
+    if (self.facebookApplicationDelegateInitialized) {
+        return;
+    }
+
+    [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:launchOptions ?: @{}];
     [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    self.facebookApplicationDelegateInitialized = YES;
 }
 
 - (void) applicationDidBecomeActive:(NSNotification *) notification {
@@ -68,11 +75,16 @@
     }
 }
 
-- (void) handleOpenURLWithAppSourceAndAnnotation:(NSNotification *) notification {
-    NSMutableDictionary * options = [notification object];
-    NSURL* url = options[@"url"];
+- (void) handleOpenURL:(NSNotification *) notification {
+    NSURL* url = notification.object;
+    NSDictionary* options = notification.userInfo ?: @{};
 
     [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication] openURL:url options:options];
+}
+
+- (void) handleOpenURLWithAppSourceAndAnnotation:(NSNotification *) notification {
+    // Deprecated in cordova-ios 8. The regular handleOpenURL notification is emitted on both
+    // cordova-ios 7 and 8, so this legacy callback is intentionally ignored to avoid double handling.
 }
 
 #pragma mark - Cordova commands
