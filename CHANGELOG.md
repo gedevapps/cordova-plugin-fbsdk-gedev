@@ -1,9 +1,22 @@
+<a name="4.1.5"></a>
+
+# [4.1.5](https://github.com/gedevapps/cordova-plugin-fbsdk-gedev/releases/tag/v4.1.5) (2026-07-28)
+
+## Bug Fixes
+
+- Fixed Facebook login callback URL handling on cordova-ios 8+
+
+## Maintenance
+
+- Made the fork installable directly from the repository root
+
 <a name="4.1.4"></a>
 
-## Refactor
+# [4.1.4](https://github.com/gedevapps/cordova-plugin-fbsdk-gedev/releases/tag/v4.1.4) (2026-04-01)
 
-- Updated the iOS script to find correct path also for cordova-ios 8+
--
+## Bug Fixes
+
+- Fixed the iOS `after_prepare` hook to locate the application directory when using cordova-ios 8+
 
 <a name="4.1.3"></a>
 

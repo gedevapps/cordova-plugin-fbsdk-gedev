@@ -13,12 +13,12 @@
 
 ## Installation
 
-Install this fork directly from GitHub:
+Install the latest stable release of this fork directly from GitHub:
 
 Make sure you've registered your Facebook app with Facebook and have an `APP_ID` [https://developers.facebook.com/apps](https://developers.facebook.com/apps).
 
 ```bash
-$ cordova plugin add https://github.com/gedevapps/cordova-plugin-fbsdk-gedev.git --save --variable APP_ID="123456789" --variable APP_NAME="myApplication" --variable CLIENT_TOKEN="abcd1234"
+cordova plugin add https://github.com/gedevapps/cordova-plugin-fbsdk-gedev.git#v4.1.5 --save --variable APP_ID="123456789" --variable APP_NAME="myApplication" --variable CLIENT_TOKEN="abcd1234"
 ```
 
 As the `APP_NAME` is used as a string in XML files, if your app name contains any special characters like "&", make sure you escape them, e.g. "&amp;".
